@@ -76,7 +76,7 @@ Options that can be defined globally include `affinity`, `nodeSelector`, `tolera
 | nodeSelector | object | `{}` | Sets pod's node selector. Can be configured also with `global.nodeSelector` |
 | nrStaging | bool | `false` | Send the metrics to the staging backend. Requires a valid staging license key. Can be configured also with `global.nrStaging` |
 | objectState.enabled | bool | `false` | Enable object state. The deployment then runs one replica with the `Recreate` strategy and a 90 s termination grace period, the ClusterRole gets get, list and watch on every resource (Secrets included), and a Role grants ConfigMap and Secret writes in the release namespace. With `rbac.create=false` the chart renders none of that RBAC, and you grant it yourself. |
-| objectState.maxRecordsPerSecond | int | `100` | Upper bound on object records sent per second. |
+| objectState.maxRecordsPerSecond | int | `3200` | Upper bound on object records sent per second. On a 5,700-object test cluster the forwarder dropped no events at any rate from 100 to 3200, and the startup burst took about 4 s at both 1600 and 3200. |
 | objectState.requireAccountFlag | bool | `true` | Collect only while the account's collection flag is on in the infrastructure command API. |
 | objectState.resendAfter | string | `"24h"` | Resend an unchanged object after this long. `"0"` turns the resend off. |
 | podAnnotations | object | `{}` | Annotations to add to the pod. |

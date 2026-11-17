@@ -32,7 +32,7 @@ tests:
               enabled: true
               requireAccountFlag: true
               resendAfter: "24h"
-              maxRecordsPerSecond: 100
+              maxRecordsPerSecond: 3200
               clusterName: a-cluster
               namespace: my-namespace
               agentEndpoint: http://localhost:8001/v1/data
@@ -58,7 +58,7 @@ tests:
               enabled: true
               requireAccountFlag: false
               resendAfter: "0"
-              maxRecordsPerSecond: 100
+              maxRecordsPerSecond: 3200
               clusterName: a-cluster
               namespace: my-namespace
               agentEndpoint: http://localhost:8001/v1/data

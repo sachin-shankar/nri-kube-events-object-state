@@ -85,7 +85,7 @@ func TestObjectStateDefaults(t *testing.T) {
 	assert.True(t, cfg.ObjectState.Enabled)
 	assert.True(t, cfg.ObjectState.requireAccountFlag())
 	assert.Equal(t, 24*time.Hour, cfg.ObjectState.resendAfter())
-	assert.Equal(t, 100.0, cfg.ObjectState.maxRecordsPerSecond())
+	assert.Equal(t, 3200.0, cfg.ObjectState.maxRecordsPerSecond())
 }
 
 func TestObjectStateParse(t *testing.T) {
