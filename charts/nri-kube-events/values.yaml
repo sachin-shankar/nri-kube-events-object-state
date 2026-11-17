@@ -106,11 +106,6 @@ scrapers:
 # custom attributes under about 50, and never name one `clusterName`.
 # @default -- See `values.yaml`
 objectState:
-  # -- Enable object state. The deployment then runs one replica with the `Recreate` strategy and a
-  # 90 s termination grace period, the ClusterRole gets get, list and watch on every resource
-  # (Secrets included), and a Role grants ConfigMap and Secret writes in the release namespace.
-  # With `rbac.create=false` the chart renders none of that RBAC, and you grant it yourself.
-  #
   # Cost per 1,000 objects in the cluster. These are estimates from the code, not measurements;
   # the `nri_kube_events_objects_hash_store_bytes_written_total` metric and the pod's RSS give
   # the real values.
@@ -122,6 +117,14 @@ objectState:
   #   watches ConfigMaps cluster-wide receives each write.
   # - Startup: the first list of every kind is held in memory at once. That peak is not
   #   measured yet; set `resources.limits.memory` from the pod's observed peak.
+  #
+  # The hash store ConfigMaps and the HMAC key Secret have fixed names, so enable object state
+  # in at most one release per namespace.
+
+  # -- Enable object state. The deployment then runs one replica with the `Recreate` strategy and a
+  # 90 s termination grace period, the ClusterRole gets get, list and watch on every resource
+  # (Secrets included), and a Role grants ConfigMap and Secret writes in the release namespace.
+  # With `rbac.create=false` the chart renders none of that RBAC, and you grant it yourself.
   enabled: false
   # -- Collect only while the account's collection flag is on in the infrastructure command API.
   requireAccountFlag: true
